@@ -15,7 +15,7 @@ html(lang="en", ng-app="app")
             button(ng-click="game.init()") Init
             button(ng-click="game.deal()") Deal
             div.cards
-              div.card(ng-repeat="card in game.cards | limitTo:20" card)
+              card(ng-repeat="card in game.cards | limitTo:20")
           div(ng-show="!game.authed")
             script(type="in/Login")
       div.scoring

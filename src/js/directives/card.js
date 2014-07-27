@@ -6,6 +6,7 @@ module.exports = angular.module('app.card', [])
 
 
     return {
+      restrict: 'E',
       templateUrl: '/templates/card.html',
       link: function(scope, element, attrs, ctrl) {
 
@@ -16,9 +17,6 @@ module.exports = angular.module('app.card', [])
 
            flip ?
              $(element).find('section').velocity('stop').velocity('flip') : $(element).find('section').velocity('stop').velocity('unflip');
-
-            // flip ?
-            //   $animate.addClass(element.find('section'), 'flipped') : $animate.removeClass(element.find('section'), 'flipped');
         }
 
 

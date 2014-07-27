@@ -15,21 +15,15 @@ module.exports = angular.module('app.AppCtrl', [])
     this.cards = [];
 
     this.deal = function() {
-              $('.container').each(function(index) {
-          console.log('meh',this);
-          $(this).attr('X', (index%5)*110+'%');
-          $(this).attr('Y', Math.floor(index/5)*110+'%');
-        });
-      $('.container').velocity('deal', {stagger: 100});
+      $('card').each(function(index) {
+        $(this).attr('X', (index%5)*110+'%');
+        $(this).attr('Y', Math.floor(index/5)*110+'%');
+      });
+      $('card').velocity('deal', {stagger: 100});
     }
 
     this.init = function() {
 
-      //$('.container').velocity('deal');
-
-
-
-      console.log('dogg',$('.container'));
       connectionsService.getConnections(20).then(function(result) {
 
         result.values.forEach(function(connection, array, index) {
@@ -49,6 +43,7 @@ module.exports = angular.module('app.AppCtrl', [])
 
         that.connections = that.connections.concat(result.values);
         console.log(that.cards);
+
       },function(error){
         console.error(error);
       });

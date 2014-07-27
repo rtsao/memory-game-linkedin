@@ -1,6 +1,5 @@
-div.container
-  section.carda(ng-click="flip()")
-    div.carda-face.back
-    div.carda-face.front(ng-switch="card.type")
-      p.tang(ng-switch-when="info") {{card.connection.firstName}} {{card.connection.lastName}}
-      img.tang(ng-switch-when="face", ng-src="{{card.connection.pictureUrl}}")
+section.card(ng-click="flip()")
+  div.card-face.back
+  div.card-face.front(ng-switch="card.type")
+    p.card-face-content(ng-switch-when="info") {{card.connection.firstName}} {{card.connection.lastName}}
+    img.card-face-content(ng-switch-when="face", ng-src="{{card.connection.pictureUrl}}")
