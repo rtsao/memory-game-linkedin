@@ -21,6 +21,8 @@
     "gulp-notify": "^1.4.0",
     "angular-bsfy": "^1.2.17-5",
     "brfs": "^1.1.2",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "velocity-animate": "^0.9.0",
+    "jquery": "^2.1.1"
   }
 }

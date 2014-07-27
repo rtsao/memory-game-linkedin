@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html(lang="en", ng-app="app")
   head
     title Hello World!
     meta(charset="utf-8")
@@ -8,7 +8,16 @@ html(lang="en")
       api_key: 75xhj58bqirfyx
       authorize: true
   body
-    h1 Hello World!
-    script(type="in/Login").
-      Hello, <?js= firstName ?> <?js= lastName ?>.
+    div.game
+      div.tableau
+        div(ng-controller="GameCtrl as game")
+          div(ng-if="game.authed") Authed!
+            button(ng-click="game.init()") Init
+            button(ng-click="game.deal()") Deal
+            div.cards
+              div.card(ng-repeat="card in game.cards | limitTo:20" card)
+          div(ng-show="!game.authed")
+            script(type="in/Login")
+      div.scoring
+        p Hello world
   script(src="js/bundle.js")
