@@ -30,8 +30,8 @@ module.exports = angular.module('app.AppCtrl', [])
     }
 
     this.pairMatched = function(card1, card2) {
-      card1.setComplete();
-      card2.setComplete();
+      card1.match();
+      card2.match();
       that.clearSelection();
     }
 
@@ -48,7 +48,7 @@ module.exports = angular.module('app.AppCtrl', [])
 
     this.selectCard = function(card) {
 
-      if (card.isComplete()) return;
+      if (card.isMatched()) return;
 
       if (!that.selection.card1) {
         card.deferred = $q.defer();
@@ -90,22 +90,22 @@ module.exports = angular.module('app.AppCtrl', [])
 
 function Card(connection) {
   this.connection = connection;
-  this.flipStatus = 'no';
-  this.complete = 'no';
+  this.flipStatus = false;
+  this.matched = false;
 }
 
 Card.prototype = {
   flip: function() {
-    this.flipStatus = 'flip';
+    this.flipStatus = true;
   },
   unflip: function() {
-    this.flipStatus = 'no';
+    this.flipStatus = false;
   },
-  setComplete: function() {
-    this.complete = 'complete';
+  match: function() {
+    this.matched = true;
   },
-  isComplete: function() {
-    return this.complete === 'complete';
+  isMatched: function() {
+    return this.matched;
   }
 }
 

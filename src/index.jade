@@ -11,7 +11,7 @@ html(lang="en", ng-app="app")
     div.game(ng-controller="GameCtrl as game")
       div.tableau
         div.cards
-          card(ng-repeat="card in game.cards | limitTo:20", ng-attr-flip-status="{{card.flipStatus}}")
+          card(ng-repeat="card in game.cards | limitTo:20", ng-attr-flip="{{card.flipStatus}}", ng-attr-matched="{{card.matched}}")
       div.scoring
         ul.scoreboard
           li 
