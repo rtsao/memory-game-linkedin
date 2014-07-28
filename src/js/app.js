@@ -1,3 +1,5 @@
+'use strict';
+
 console.log('Hello1 world!')
 
 var $ = require('jquery');

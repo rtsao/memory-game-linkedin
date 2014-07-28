@@ -10,15 +10,18 @@ module.exports = angular.module('app.card', [])
       templateUrl: '/templates/card.html',
       link: function(scope, element, attrs, ctrl) {
 
-        var flip = false;
+        attrs.$observe('flipStatus', function(value) {
 
-        scope.flip = function() {
-          flip=!flip;
+          var card = $(element).find('section');
+          card.velocity('stop');
 
-           flip ?
-             $(element).find('section').velocity('stop').velocity('flip') : $(element).find('section').velocity('stop').velocity('unflip');
-        }
-
+          value === 'flip' ?
+            card.velocity('flip', function() {
+              scope.card.deferred.resolve();
+            })
+            :
+            card.velocity('unflip');
+        });
 
       }
     }

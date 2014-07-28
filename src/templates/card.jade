@@ -1,5 +1,5 @@
-section.card(ng-click="flip()")
+section.card(ng-click="game.selectCard(card)")
   div.card-face.back
   div.card-face.front(ng-switch="card.type")
-    p.card-face-content(ng-switch-when="info") {{card.connection.firstName}} {{card.connection.lastName}}
-    img.card-face-content(ng-switch-when="face", ng-src="{{card.connection.pictureUrl}}")
+    p.card-face-content(ng-switch-when="infoCard") {{card.connection.firstName}} {{card.connection.lastName}}
+    img.card-face-content(ng-switch-when="photoCard", ng-src="{{card.connection.pictureUrl}}")
