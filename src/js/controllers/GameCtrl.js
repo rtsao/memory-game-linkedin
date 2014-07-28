@@ -2,24 +2,33 @@
 
 var $ = require('jquery')
   , angular = require('angular-bsfy')
+  , _ = require('lodash')
 
 module.exports = angular.module('app.AppCtrl', [])
   .controller('GameCtrl', ['connectionsService', '$scope', '$q', '$timeout', function(connectionsService, $scope, $q, $timeout) {
   
     var that = this;
 
-    $scope.$watch(connectionsService.isAuthenticated, function (newVal, oldVal) {
+    $scope.$watch(connectionsService.isAuthenticated, function(newVal, oldVal) {
       that.authed = newVal;
+    });
+
+    $scope.$watch('game.cards.length', function(newVal, oldVal) {
+      if (newVal === 0) {
+        console.log('completed!');
+      }
     });
 
     this.connections = [];
     this.cards = [];
     this.selection = {};
+    this.turns = 0;
 
     this.checkPair = function(card1, card2) {
-      var cardPromises = [card1.promise, card2.deferred.promise];
+      var animationPromises = [card1.promise, card2.animation.promise];
+      that.turns++;
 
-      $q.all(cardPromises).then(function() {
+      $q.all(animationPromises).then(function() {
         if (card1.connection.id === card2.connection.id) {
           $timeout(function(){that.pairMatched(card1, card2)}, 600);
         }
@@ -30,9 +39,16 @@ module.exports = angular.module('app.AppCtrl', [])
     }
 
     this.pairMatched = function(card1, card2) {
+      card1.animation = $q.defer();
+      card2.animation = $q.defer();
       card1.match();
       card2.match();
       that.clearSelection();
+
+      var animationPromises = [card1.promise, card2.animation.promise];
+      $q.all(animationPromises).then(function(){
+        that.cards = _.without(that.cards, card1, card2);
+      });
     }
 
     this.pairMismatched = function(card1, card2) {
@@ -51,12 +67,12 @@ module.exports = angular.module('app.AppCtrl', [])
       if (card.isMatched()) return;
 
       if (!that.selection.card1) {
-        card.deferred = $q.defer();
+        card.animation = $q.defer();
         that.selection.card1 = card;
         card.flip();
       }
       else if (!that.selection.card2 && that.selection.card1 !== card) {
-        card.deferred = $q.defer();
+        card.animation = $q.defer();
         that.selection.card2 = card;
         card.flip();
         that.checkPair(that.selection.card1, card);

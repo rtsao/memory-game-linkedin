@@ -15,7 +15,7 @@ html(lang="en", ng-app="app")
       div.scoring
         ul.scoreboard
           li 
-            p Turns: 5
+            p Turns: {{game.turns}} Length: {{game.cards.length}}
             div(ng-if="game.authed") Authed!
               button(ng-click="game.init()") Init
               button(ng-click="game.deal()") Deal

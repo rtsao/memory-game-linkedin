@@ -15,7 +15,7 @@ module.exports = angular.module('app.card', [])
 
           value === 'true' ?
             card.velocity('flip', function() {
-              scope.card.deferred.resolve();
+              scope.card.animation.resolve();
             })
             :
             card.velocity('unflip');
@@ -26,7 +26,9 @@ module.exports = angular.module('app.card', [])
           card.velocity('stop');
 
           if (value === 'true') {
-            card.velocity('transition.slideUpOut');
+            card.velocity('transition.slideUpOut', function() {
+              scope.card.animation.resolve();
+            });
           }
         });
 
