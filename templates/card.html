@@ -1,0 +1,1 @@
+<div class="card-face back"></div><div ng-switch="card.type" class="card-face front"><p ng-switch-when="infoCard" class="card-face-content">{{card.connection.firstName}} {{card.connection.lastName}}</p><img ng-switch-when="photoCard" ng-src="{{card.connection.pictureUrl}}" class="card-face-content"/></div>
