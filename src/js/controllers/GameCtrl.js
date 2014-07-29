@@ -9,26 +9,19 @@ module.exports = angular.module('app.AppCtrl', [])
   
     var that = this;
 
-    $scope.$watch(connectionsService.isAuthenticated, function(newVal, oldVal) {
-      that.authed = newVal;
+    $scope.$watch(connectionsService.isAuthenticated, function(authed) {
+      that.authed = authed;
 
-      if (newVal) {
+      if (authed) {
         that.init();
       }
     });
 
-    $scope.$watch('game.cards.length', function(newVal, oldVal) {
-      if (newVal === 0 && oldVal > 0) {
+    $scope.$watch('game.cards.length', function(newLength, oldLength) {
+      if (newLength === 0 && oldLength > 0) {
         that.win = true;
       }
     });
-
-    this.connections = [];
-    this.cards = [];
-    this.selection = {};
-    this.turns = 0;
-    this.matchedConnections = [];
-    this.win = false;
 
     this.checkPair = function(card1, card2) {
       var animationPromises = [card1.promise, card2.animation.promise];
@@ -102,6 +95,14 @@ module.exports = angular.module('app.AppCtrl', [])
     }
 
     this.init = function() {
+
+      this.connections = [];
+      this.cards = [];
+      this.selection = {};
+      this.turns = 0;
+      this.matchedConnections = [];
+      this.win = false;
+
       connectionsService.getConnections(20).then(function(result) {
 
         result.values.forEach(function(connection, array, index) {
@@ -119,10 +120,6 @@ module.exports = angular.module('app.AppCtrl', [])
     }
 
     this.newGame = function() {
-      this.win = false;
-      this.turns = 0;
-      this.matchedConnections.length = 0;
-      this.connections.length = 0;
       this.init();
     }
 
