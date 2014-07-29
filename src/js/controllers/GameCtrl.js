@@ -108,7 +108,7 @@ module.exports = angular.module('app.AppCtrl', [])
         result.values.forEach(function(connection, array, index) {
           that.cards.push(new PhotoCard(connection), new InfoCard(connection));
         });
-        //that.cards = _.shuffle(that.cards);
+        that.cards = _.shuffle(that.cards);
         that.connections = result.values;
         $timeout(that.deal, 0); //Add to end of browser queue so we've already rendered the cards
 

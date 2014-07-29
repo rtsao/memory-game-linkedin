@@ -6,8 +6,8 @@
     text-transform: uppercase;
     font-size: 1vmax;
     display: inline-block;
-    border-radius: 0.5vmax;
-    background: #fff;
+    border-radius: @border-radius;
+    background: @item-background-color;
     padding: 1vmax;
     text-align: center;
   }
@@ -32,15 +32,15 @@
     }
 
     display: flex;
-    background: white;
-    border-radius: 0.5vmax;
+    background: @item-background-color;
+    border-radius: @border-radius;
     align-items: flex-start;
     margin: 0.5vmax 0;
     padding: 1vmax;
 
     &-img {
       margin-right: 1em;
-      border-radius: 0.5vmax;
+      border-radius: @border-radius;
       align-self: center;
     }
 

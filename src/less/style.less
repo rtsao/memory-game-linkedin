@@ -1,5 +1,3 @@
-
-
 @goldenratio: 1.618;
 @tableau-width: 100vw/@goldenratio;
 @tableau-height: 100vh;
@@ -7,11 +5,12 @@
 @scoring-width: 100vw - @tableau-width;
 @num-cols: 5;
 
+@border-radius: 0.5vmax;
+
 @card-width: (@tableau-width - 10%)/@num-cols;
 @card-height: (100vh)/@num-cols;
 
-@bg: #CFC7AC;
-
+@import "colors";
 @import "cards";
 @import "scoring";
 @import "animations.less";
@@ -25,7 +24,7 @@
 }
 
 body {
-  background: @bg;
+  background: @background-color;
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
@@ -60,10 +59,10 @@ body {
   bottom: 3%;
   width: 100vw;
   text-align: center;
-  color: darken(@bg, 45%);
+  color: darken(@background-color, 45%);
 
   a {
     text-decoration: none;
-    color: darken(@bg, 75%);
+    color: darken(@background-color, 75%);
   }
 }
