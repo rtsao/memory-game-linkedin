@@ -1,12 +1,13 @@
 var angular = require('angular-bsfy');
 var $ = require('jquery');
+var fs = require('fs');
 
 module.exports = angular.module('app.card', [])
   .directive('card', ['$animate', function($animate) {
 
     return {
       restrict: 'E',
-      templateUrl: '/templates/card.html',
+      template: fs.readFileSync(__dirname + '/../../../build/templates/card.html', 'utf8'),
       link: function(scope, element, attrs, ctrl) {
 
         attrs.$observe('flip', function(value) {
