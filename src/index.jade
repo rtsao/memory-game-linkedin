@@ -14,8 +14,12 @@ html(lang="en", ng-app="app")
           card(ng-repeat="card in game.cards | limitTo:20", ng-attr-flip="{{card.flipStatus}}", ng-attr-matched="{{card.matched}}")
         div.info(ng-show="!game.authed")
           h1 Super cool game
-        div.info(ng-show="game.win")
-          h1 You win!
+        div.win(ng-show="game.win")
+          h2 It took you {{game.turns}} turns to clear the tableau.
+          p.message(ng-if="game.turns <= game.connections.length ") Cheater.
+          p.message(ng-if="game.turns <= 1.5*game.connections.length && game.turns > game.connections.length") Nice job!
+          p.message(ng-if="game.turns <= 2*game.connections.length && game.turns > 1.5*game.connections.length") You did okay.
+          p.message(ng-if="game.turns > 2*game.connections.length") Wow, you must be bad with faces.
       div.scoring
         ul.scoreboard
           li 
