@@ -3,9 +3,8 @@ html(lang="en", ng-app="app")
   head
     title Hello World!
     meta(charset="utf-8")
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Lato", type="text/css")
     link(rel="stylesheet", href="css/style.css", type="text/css")
-
     script(type="text/javascript" src="http://platform.linkedin.com/in.js").
       api_key: 75xhj58bqirfyx
       authorize: true
@@ -40,5 +39,4 @@ html(lang="en", ng-app="app")
     div.footer
       | A game by Ryan Tsao 
       a(href="https://github.com/rtsao/memory-game-linkedin/") (Source)
-
   script(src="js/bundle.js")

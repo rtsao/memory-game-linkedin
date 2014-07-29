@@ -1,0 +1,51 @@
+.ng-hide-remove {
+  &:extend(.fadeIn);
+}
+
+.ng-hide-add {
+  &:extend(.fadeOut);
+}
+
+body {
+  background: @background-color;
+  margin: 0;
+  padding: 0;
+  font-family: @font-family;
+}
+
+.tableau {
+  width: @tableau-width;
+  height: @tableau-height;
+  padding: 3%;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: @scoring-width;
+  height: @scoring-height;
+  padding: 3%;
+  box-sizing: border-box;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.win {
+  text-align: center;
+  margin-top: 20%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 3%;
+  width: 100vw;
+  text-align: center;
+  color: darken(@background-color, 45%);
+
+  a {
+    text-decoration: none;
+    color: darken(@background-color, 75%);
+  }
+}
