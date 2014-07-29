@@ -14,16 +14,19 @@ html(lang="en", ng-app="app")
           card(ng-repeat="card in game.cards | limitTo:20", ng-attr-flip="{{card.flipStatus}}", ng-attr-matched="{{card.matched}}")
         div.info(ng-show="!game.authed")
           h1 Super cool game
+        div.info(ng-show="game.win")
+          h1 You win!
       div.scoring
         ul.scoreboard
           li 
             div(ng-if="game.authed") Authed!
               p Turns: {{game.turns}} Length: {{game.cards.length}}
+              p(ng-show="game.win") You win!
               button(ng-click="game.init()") Init
               button(ng-click="game.deal()") Deal
             div(ng-if="!game.authed")
               script(type="in/Login")
           li(ng-repeat="connection in game.matchedConnections")
             img(ng-src="{{connection.pictureUrl}}")
-            p {{connection.firstName}} {{connection.LastName}}
+            p {{connection.firstName}} {{connection.lastName}}
   script(src="js/bundle.js")

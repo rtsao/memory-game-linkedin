@@ -18,8 +18,8 @@ module.exports = angular.module('app.AppCtrl', [])
     });
 
     $scope.$watch('game.cards.length', function(newVal, oldVal) {
-      if (newVal === 0) {
-        console.log('completed!');
+      if (newVal === 0 && oldVal > 0) {
+        that.win = true;
       }
     });
 
@@ -28,6 +28,7 @@ module.exports = angular.module('app.AppCtrl', [])
     this.selection = {};
     this.turns = 0;
     this.matchedConnections = [];
+    this.win = false;
 
     this.checkPair = function(card1, card2) {
       var animationPromises = [card1.promise, card2.animation.promise];
