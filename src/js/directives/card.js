@@ -10,23 +10,21 @@ module.exports = angular.module('app.card', [])
       link: function(scope, element, attrs, ctrl) {
 
         attrs.$observe('flip', function(value) {
-          var card = $(element).find('section');
-          card.velocity('stop');
+          element.velocity('stop');
 
           value === 'true' ?
-            card.velocity('flip', function() {
+            element.velocity('flip', function() {
               scope.card.animation.resolve();
             })
             :
-            card.velocity('unflip');
+            element.velocity('unflip');
         });
 
         attrs.$observe('matched', function(value) {
-          var card = $(element).find('section');
-          card.velocity('stop');
+          element.velocity('stop');
 
           if (value === 'true') {
-            card.velocity('transition.slideUpOut', function() {
+            element.velocity('transition.slideUpOut', function() {
               scope.card.animation.resolve();
             });
           }

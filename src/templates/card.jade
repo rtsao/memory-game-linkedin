@@ -1,5 +1,4 @@
-section.card(ng-click="game.selectCard(card)")
-  div.card-face.back
-  div.card-face.front(ng-switch="card.type")
-    p.card-face-content(ng-switch-when="infoCard") {{card.connection.firstName}} {{card.connection.lastName}}
-    img.card-face-content(ng-switch-when="photoCard", ng-src="{{card.connection.pictureUrl}}")
+div.card-face.back
+div.card-face.front(ng-switch="card.type")
+  p.card-face-content(ng-switch-when="infoCard") {{card.connection.firstName}} {{card.connection.lastName}}
+  img.card-face-content(ng-switch-when="photoCard", ng-src="{{card.connection.pictureUrl}}")

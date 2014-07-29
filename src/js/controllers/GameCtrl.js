@@ -94,22 +94,23 @@ module.exports = angular.module('app.AppCtrl', [])
     }
 
     this.deal = function() {
-      $('card').each(function(index) {
+      $('.slot').each(function(index) {
         $(this).attr('X', (index%5)*110+'%');
         $(this).attr('Y', Math.floor(index/5)*110+'%');
       });
-      $('card').velocity('deal', {stagger: 100});
+      $('.slot').velocity('deal', {stagger: 100});
     }
 
     this.init = function() {
-
       connectionsService.getConnections(20).then(function(result) {
 
         result.values.forEach(function(connection, array, index) {
-          that.cards.push(new PhotoCard(connection), new InfoCard(connection));
+          if (connection.pictureUrl) {
+            that.cards.push(new PhotoCard(connection), new InfoCard(connection));
+            that.connections.push(connection);
+          }
         });
         that.cards = _.shuffle(that.cards);
-        that.connections = result.values;
         $timeout(that.deal, 0); //Add to end of browser queue so we've already rendered the cards
 
       }, function(error) {
@@ -121,6 +122,7 @@ module.exports = angular.module('app.AppCtrl', [])
       this.win = false;
       this.turns = 0;
       this.matchedConnections.length = 0;
+      this.connections.length = 0;
       this.init();
     }
 

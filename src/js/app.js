@@ -1,18 +1,9 @@
 'use strict';
 
-console.log('Hello1 world!')
-
-var $ = require('jquery');
-window.jQuery = $;
-
-
-
-var velocity = require('velocity-animate');
-var velocityui = require('velocity-animate/velocity.ui');
-
-var animations = require('./animations');
-
-
+var $ = window.jQuery = require('jquery')
+  , velocity = require('velocity-animate')
+  , velocityui = require('velocity-animate/velocity.ui')
+  , animations = require('./animations')
 
 var angular = require('angular-bsfy')
   , ngAnimate = require('angular-bsfy/animate')

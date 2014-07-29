@@ -13,7 +13,8 @@ html(lang="en", ng-app="app")
     div.game(ng-controller="GameCtrl as game")
       div.tableau
         div.cards(ng-show="game.authed")
-          card(ng-repeat="card in game.cards | limitTo:20", ng-attr-flip="{{card.flipStatus}}", ng-attr-matched="{{card.matched}}")
+          div.slot(ng-repeat="card in game.cards | limitTo:20")
+            card.card(ng-attr-flip="{{card.flipStatus}}", ng-attr-matched="{{card.matched}}", ng-click="game.selectCard(card)")
         div.info(ng-show="!game.authed")
           h1 LinkedIn Connection Concentration
           p Please authorize this game with your LinkedIn account.
