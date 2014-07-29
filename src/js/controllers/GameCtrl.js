@@ -103,7 +103,7 @@ module.exports = angular.module('app.AppCtrl', [])
       this.matchedConnections = [];
       this.win = false;
 
-      connectionsService.getConnections(20).then(function(result) {
+      connectionsService.getConnections(10).then(function(result) {
 
         result.values.forEach(function(connection, array, index) {
           if (connection.pictureUrl) {
