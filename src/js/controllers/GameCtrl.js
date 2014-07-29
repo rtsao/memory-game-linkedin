@@ -108,12 +108,20 @@ module.exports = angular.module('app.AppCtrl', [])
         result.values.forEach(function(connection, array, index) {
           that.cards.push(new PhotoCard(connection), new InfoCard(connection));
         });
-        that.connections = that.connections.concat(result.values);
+        //that.cards = _.shuffle(that.cards);
+        that.connections = result.values;
         $timeout(that.deal, 0); //Add to end of browser queue so we've already rendered the cards
 
       }, function(error) {
         console.error(error);
       });
+    }
+
+    this.newGame = function() {
+      this.win = false;
+      this.turns = 0;
+      this.matchedConnections.length = 0;
+      this.init();
     }
 
   }])

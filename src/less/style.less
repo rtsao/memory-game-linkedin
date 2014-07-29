@@ -10,32 +10,39 @@
 @card-width: (@tableau-width - 10%)/@num-cols;
 @card-height: (100vh)/@num-cols;
 
+@bg: #CFC7AC;
+
 @import "cards";
 @import "scoring";
 @import "animations.less";
 
-li.ng-enter, .ng-hide-remove {
-  .fadeIn;
+.ng-hide-remove {
+  &:extend(.fadeIn);
 }
 
 .ng-hide-add {
-  .fadeOut;
+  &:extend(.fadeOut);
 }
 
 body {
-  background-color: #ccc;
+  background: @bg;
   margin: 0;
-  padding: 3%;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
 }
 
 .tableau {
   width: @tableau-width;
   height: @tableau-height;
+  padding: 3%;
+  box-sizing: border-box;
 }
 
-.scoring {
+.sidebar {
   width: @scoring-width;
   height: @scoring-height;
+  padding: 3%;
+  box-sizing: border-box;
 }
 
 .game {
@@ -46,4 +53,17 @@ body {
 .win {
   text-align: center;
   margin-top: 20%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 3%;
+  width: 100vw;
+  text-align: center;
+  color: darken(@bg, 45%);
+
+  a {
+    text-decoration: none;
+    color: darken(@bg, 75%);
+  }
 }

@@ -1,11 +1,60 @@
-.scoreboard {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 
-  li {
-    background: white;
-    margin: 4px;
-    padding: 10px;
+
+.scoreboard {
+
+  .turns {
+    text-transform: uppercase;
+    font-size: 1vmax;
+    display: inline-block;
+    border-radius: 0.5vmax;
+    background: #fff;
+    padding: 1vmax;
+    text-align: center;
   }
+
+  .count {
+    font-size: 3vmax;
+  }
+
+  .connections {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .connection {
+
+    &.ng-enter {
+      &:extend(.fadeIn);
+    }
+
+    &.ng-leave {
+      &:extend(.fadeOut);
+    }
+
+    display: flex;
+    background: white;
+    border-radius: 0.5vmax;
+    align-items: flex-start;
+    margin: 0.5vmax 0;
+    padding: 1vmax;
+
+    &-img {
+      margin-right: 1em;
+      border-radius: 0.5vmax;
+      align-self: center;
+    }
+
+    &-info {
+      flex: 1
+    }
+
+    &-name {
+    }
+
+    &-headline {
+      font-size: 0.8em;
+      color: #999;
+    }
+  }
+
 }

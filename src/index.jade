@@ -3,7 +3,9 @@ html(lang="en", ng-app="app")
   head
     title Hello World!
     meta(charset="utf-8")
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     link(rel="stylesheet", href="css/style.css", type="text/css")
+
     script(type="text/javascript" src="http://platform.linkedin.com/in.js").
       api_key: 75xhj58bqirfyx
       authorize: true
@@ -13,24 +15,29 @@ html(lang="en", ng-app="app")
         div.cards(ng-show="game.authed")
           card(ng-repeat="card in game.cards | limitTo:20", ng-attr-flip="{{card.flipStatus}}", ng-attr-matched="{{card.matched}}")
         div.info(ng-show="!game.authed")
-          h1 Super cool game
+          h1 LinkedIn Connection Concentration
+          p Please authorize this game with your LinkedIn account.
+          script(type="in/Login")
         div.win(ng-show="game.win")
           h2 It took you {{game.turns}} turns to clear the tableau.
-          p.message(ng-if="game.turns <= game.connections.length ") Cheater.
-          p.message(ng-if="game.turns <= 1.5*game.connections.length && game.turns > game.connections.length") Nice job!
-          p.message(ng-if="game.turns <= 2*game.connections.length && game.turns > 1.5*game.connections.length") You did okay.
-          p.message(ng-if="game.turns > 2*game.connections.length") Wow, you must be bad with faces.
-      div.scoring
-        ul.scoreboard
-          li 
-            div(ng-if="game.authed") Authed!
-              p Turns: {{game.turns}} Length: {{game.cards.length}}
-              p(ng-show="game.win") You win!
-              button(ng-click="game.init()") Init
-              button(ng-click="game.deal()") Deal
-            div(ng-if="!game.authed")
-              script(type="in/Login")
-          li(ng-repeat="connection in game.matchedConnections")
-            img(ng-src="{{connection.pictureUrl}}")
-            p {{connection.firstName}} {{connection.lastName}}
+          p.message(ng-if="game.turns <= game.connections.length") Cheater.
+          p.message(ng-if="game.turns <= 2*game.connections.length && game.turns > game.connections.length") Nice job!
+          p.message(ng-if="game.turns <= 3*game.connections.length && game.turns > 2*game.connections.length") You did okay.
+          p.message(ng-if="game.turns > 3*game.connections.length") Wow, you must be bad with faces.
+          button(ng-click="game.newGame()") New Game
+      div.sidebar
+        div.scoreboard 
+          div.turns(ng-if="game.authed")
+            | Turns 
+            div.count {{game.turns}}
+          ul.connections
+            li.connection(ng-repeat="connection in game.matchedConnections")
+              img.connection-img(ng-src="{{connection.pictureUrl}}")
+              div.connection-info
+                p.connection-name {{connection.firstName}} {{connection.lastName}}
+                p.connection-headline {{connection.headline}}
+    div.footer
+      | A game by Ryan Tsao 
+      a(href="#") (Source)
+
   script(src="js/bundle.js")
