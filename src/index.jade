@@ -10,17 +10,18 @@ html(lang="en", ng-app="app")
   body
     div.game(ng-controller="GameCtrl as game")
       div.tableau
-        div.cards
+        div.cards(ng-show="game.authed")
           card(ng-repeat="card in game.cards | limitTo:20", ng-attr-flip="{{card.flipStatus}}", ng-attr-matched="{{card.matched}}")
+        div.info(ng-show="!game.authed")
+          h1 Super cool game
       div.scoring
         ul.scoreboard
           li 
-            p Turns: {{game.turns}} Length: {{game.cards.length}}
             div(ng-if="game.authed") Authed!
+              p Turns: {{game.turns}} Length: {{game.cards.length}}
               button(ng-click="game.init()") Init
               button(ng-click="game.deal()") Deal
-
-            div(ng-show="!game.authed")
+            div(ng-if="!game.authed")
               script(type="in/Login")
           li(ng-repeat="connection in game.matchedConnections")
             img(ng-src="{{connection.pictureUrl}}")

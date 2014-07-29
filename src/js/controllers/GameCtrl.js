@@ -11,6 +11,10 @@ module.exports = angular.module('app.AppCtrl', [])
 
     $scope.$watch(connectionsService.isAuthenticated, function(newVal, oldVal) {
       that.authed = newVal;
+
+      if (newVal) {
+        that.init();
+      }
     });
 
     $scope.$watch('game.cards.length', function(newVal, oldVal) {
@@ -29,13 +33,20 @@ module.exports = angular.module('app.AppCtrl', [])
       var animationPromises = [card1.promise, card2.animation.promise];
       that.turns++;
 
+      var match = card1.connection.id === card2.connection.id;
+
+      if (match) {
+        //Clear selection immediately so we don't wait for animation
+        that.clearSelection();
+      }
+
       $q.all(animationPromises).then(function() {
-        if (card1.connection.id === card2.connection.id) {
-          $timeout(function(){that.pairMatched(card1, card2)}, 600);
-        }
-        else {
-          $timeout(function(){that.pairMismatched(card1, card2)}, 600);
-        }
+        $timeout(function() {
+          match ?
+            that.pairMatched(card1, card2)
+            :
+            that.pairMismatched(card1, card2)
+        }, 600);
       });
     }
 
@@ -44,7 +55,6 @@ module.exports = angular.module('app.AppCtrl', [])
       card2.animation = $q.defer();
       card1.match();
       card2.match();
-      that.clearSelection();
 
       that.matchedConnections.push(card1.connection);
 
@@ -66,7 +76,6 @@ module.exports = angular.module('app.AppCtrl', [])
     }
 
     this.selectCard = function(card) {
-
       if (card.isMatched()) return;
 
       if (!that.selection.card1) {
@@ -99,6 +108,7 @@ module.exports = angular.module('app.AppCtrl', [])
           that.cards.push(new PhotoCard(connection), new InfoCard(connection));
         });
         that.connections = that.connections.concat(result.values);
+        $timeout(that.deal, 0); //Add to end of browser queue so we've already rendered the cards
 
       }, function(error) {
         console.error(error);
