@@ -23,6 +23,7 @@ module.exports = angular.module('app.AppCtrl', [])
     this.cards = [];
     this.selection = {};
     this.turns = 0;
+    this.matchedConnections = [];
 
     this.checkPair = function(card1, card2) {
       var animationPromises = [card1.promise, card2.animation.promise];
@@ -45,8 +46,10 @@ module.exports = angular.module('app.AppCtrl', [])
       card2.match();
       that.clearSelection();
 
+      that.matchedConnections.push(card1.connection);
+
       var animationPromises = [card1.promise, card2.animation.promise];
-      $q.all(animationPromises).then(function(){
+      $q.all(animationPromises).then(function() {
         that.cards = _.without(that.cards, card1, card2);
       });
     }

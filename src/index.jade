@@ -22,5 +22,7 @@ html(lang="en", ng-app="app")
 
             div(ng-show="!game.authed")
               script(type="in/Login")
-          li Bob Smith
+          li(ng-repeat="connection in game.matchedConnections")
+            img(ng-src="{{connection.pictureUrl}}")
+            p {{connection.firstName}} {{connection.LastName}}
   script(src="js/bundle.js")

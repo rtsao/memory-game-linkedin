@@ -1,0 +1,45 @@
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fadeIn {
+  animation: .5s fadeInUp;
+}
+
+.fadeOut {
+  animation: .5s fadeOutUp;
+}
+
+.spin {
+  animation: .6s spin linear infinite;
+}
